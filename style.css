@@ -1,0 +1,501 @@
+/* إعداد الصور بمقياس متساوي */
+.image-container img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* لضمان احتواء الصورة دون تشويه */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer; /* إظهار مؤشر اليد */
+    transition: transform 0.3s ease; /* تأثير سلس للتكبير */
+}
+
+/* تكبير الصورة عند المرور بالماوس */
+.image-container img:hover {
+    transform: scale(1.1);
+}
+
+/* نافذة التكبير */
+#image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: none; /* الإخفاء الافتراضي */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* الصورة المكبرة */
+#image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+/* إغلاق النافذة عند الضغط */
+#image-modal:active {
+    display: none;
+}
+
+/* الأساسيات */
+body {
+    font-family: 'Tajawal', Arial, sans-serif;
+    background-color: #e0f7fa;
+    margin: 0;
+    padding: 0;
+    color: #004d40;
+}
+
+/* شريط التنقل */
+.navbar {
+    background-color: #004d40;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-wrap: wrap;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #b2dfdb;
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* العرض الرئيسي */
+.presentation {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+h1 {
+    color: #00695c;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #00796b;
+    margin-top: 20px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #e0f2f1;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+h2:hover {
+    background-color: #b2dfdb;
+}
+
+/* التفاصيل */
+.details {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border-left: 4px solid #004d40;
+    background: #f1f8e9;
+    border-radius: 8px;
+}
+
+.details-item {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+    width: calc(33.33% - 20px);
+    vertical-align: top;
+}
+
+.details-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.details-item img:hover {
+    transform: scale(1.1);
+}
+
+.details-caption {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+h1 {
+    color: #00796b;
+    margin-bottom: 20px;
+}
+
+#upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #e0f2f1;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    background: #b2dfdb;
+}
+
+.upload-area p {
+    margin: 0;
+    font-size: 16px;
+    color: #004d40;
+}
+
+.upload-area span {
+    color: #00796b;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#album {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.album img, .album video {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.album img:hover, .album video:hover {
+    transform: scale(1.1);
+}
+
+.album video {
+    cursor: pointer;
+}
+
+/* المنطقة السفلى */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #004d40;
+}
+
+/* منطقة الرفع */
+.upload-area {
+    border: 2px dashed #00796b;
+    padding: 20px;
+    background: #e0f2f1;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-area:hover {
+    background: #b2dfdb;
+}
+
+.upload-area p {
+    margin: 0;
+    font-size: 16px;
+    color: #004d40;
+}
+
+.upload-area span {
+    color: #00796b;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+img {
+    max-width: 150px;
+    max-height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.image-container img {
+    display: block;
+    margin-bottom: 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* الألبوم */
+.album {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.album img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.album img:hover {
+    transform: scale(1.1);
+}
+
+/* استجابة الأجهزة الصغيرة */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar a {
+        font-size: 0.9em;
+        margin: 5px 0;
+    }
+
+    .details-item {
+        width: calc(50% - 20px);
+    }
+}
+
+/* استجابة الأجهزة الصغيرة جدًا */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .upload-area p {
+        font-size: 14px;
+    }
+
+    .details-item {
+        width: calc(100% - 20px);
+    }
+
+    .album img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* شريط التنقل */
+.navbar {
+    background-color: #004d40;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #b2dfdb;
+}
+
+.navbar .icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.menu-toggle {
+    display: none;
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* استجابة الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        text-align: right;
+        background-color: #004d40;
+        padding: 10px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .icon {
+        order: 1;
+    }
+}
+/* استايلات التعليقات */
+#comments-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#comments-section h3 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+}
+
+#comment-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    direction: rtl; /* لتنسيق النصوص باللغة العربية */
+}
+
+#submit-comment {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#submit-comment:hover {
+    background-color: #0056b3;
+}
+
+#comments-container {
+    margin-top: 20px;
+}
+
+.comment {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    direction: rtl; /* جعل الاتجاه من اليمين لليسار */
+}
+
+.comment p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.delete-comment-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-comment-btn:hover {
+    background-color: darkred;
+}
+
+
+
