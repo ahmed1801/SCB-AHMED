@@ -88,6 +88,10 @@ button {
     background-color: #17a2b8;
     color: white;
 }
+.back-btn {
+    background-color: #ec8e22;
+    color: white;
+}
 
 /* تأثير عند تمرير الفأرة */
 button:hover {

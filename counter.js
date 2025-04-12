@@ -110,6 +110,11 @@
                 tableBody.appendChild(row);
             }
         }
+
+        // العودة إلى الصفحة الرئيسية
+    function goBack1() {
+        window.location.href = "index.html";
+    }
     
         initializeTable();
   
